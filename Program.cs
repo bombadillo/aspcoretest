@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
 namespace AspCoreTest
 {
@@ -11,6 +13,7 @@ namespace AspCoreTest
             
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
 

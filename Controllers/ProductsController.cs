@@ -3,26 +3,29 @@ namespace AspCoreTest.Controllers
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
+    
     using Models;
+    using Services;
 
     [Route("/api/products")]
     public class ProductsController
     {
-        private static List<Product> _products = new List<Product>(new[] {
-            new Product() { Id = 1, Name = "Computer" },
-            new Product() { Id = 2, Name = "Radio" },
-            new Product() { Id = 3, Name = "Apple" },
-        });
+        private readonly IRetrieveProduct ProductRetriever;       
+
+        public ProductsController(IRetrieveProduct productRetriever)
+        {
+            ProductRetriever = productRetriever;
+        }
 
         public IEnumerable<Product> Get()
         {
-            return _products;
+            return ProductRetriever.Retrieve();            
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-        {
-            var product = _products.FirstOrDefault(p => p.Id == id);
+        {            
+            var product = ProductRetriever.Retrieve().FirstOrDefault(p => p.Id == id);
 
             if (product == null)
             {
@@ -33,9 +36,9 @@ namespace AspCoreTest.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]Product product)
+        public IActionResult Post([FromBody]Product product)
         {
-            _products.Add(product);
+            return new OkObjectResult(product);
         }
         
         

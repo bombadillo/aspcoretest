@@ -6,6 +6,8 @@ namespace AspCoreTest
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
     
+    using Services;
+    
     public class Startup
     {
         
@@ -13,6 +15,8 @@ namespace AspCoreTest
         { 
             services.AddMvcCore()
                     .AddJsonFormatters();
+                    
+            services.AddTransient<IRetrieveProduct, ProductRetriever>();
         }
         
         public void Configure(IApplicationBuilder app)

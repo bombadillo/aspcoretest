@@ -7,13 +7,14 @@ namespace AspCoreTest.Tests
     
     using Controllers;
     using Models;
+    using Services;
     
     public class ProductControllerTests
     {
         [Fact]
         public void Get_ReturnsListOfProducts()
         {
-            var sut = new ProductsController();
+            var sut = new ProductsController(new ProductRetriever());
             
             var result = sut.Get();
             
@@ -23,7 +24,7 @@ namespace AspCoreTest.Tests
         [Fact]
         public void GetWithId_ReturnsOneProduct()
         {
-            var sut = new ProductsController();
+            var sut = new ProductsController(new ProductRetriever());
             
             var result = sut.Get(1);
             
@@ -33,13 +34,12 @@ namespace AspCoreTest.Tests
         [Fact]
         public void Post_AddsProductToProductsList()
         {
-            var sut = new ProductsController();
+            var sut = new ProductsController(new ProductRetriever());
             var expected = sut.Get().Count() + 1;
             
-            sut.Post(new Product{ Id = 4, Name = "Banana"});                       
-            var result = sut.Get().Count();
+            var result = sut.Post(new Product{ Id = 4, Name = "Banana"});                       
             
-            Assert.Equal(expected, result);
+            Assert.IsType<OkObjectResult> (result);
         }
     }    
 }

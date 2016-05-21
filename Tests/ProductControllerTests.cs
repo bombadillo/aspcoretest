@@ -2,6 +2,7 @@ namespace AspCoreTest.Tests
 {
     using Xunit;
     using System.Collections.Generic;
+    using Microsoft.AspNetCore.Mvc;
     
     using Controllers;
     using Models;
@@ -17,5 +18,15 @@ namespace AspCoreTest.Tests
             
             Assert.IsType<List<Product>> (result);
         }        
+        
+        [Fact]
+        public void GetWithId_ReturnsOneProduct()
+        {
+            var sut = new ProductsController();
+            
+            var result = sut.Get(1);
+            
+            Assert.IsType<OkObjectResult> (result);
+        }
     }    
 }

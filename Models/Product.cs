@@ -1,4 +1,4 @@
-namespace AspCoreTest 
+namespace AspCoreTest.Models 
 {
     public class Product
     {

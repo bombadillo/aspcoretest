@@ -3,6 +3,7 @@ namespace AspCoreTest.Tests
     using Xunit;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
     
     using Controllers;
     using Models;
@@ -27,6 +28,18 @@ namespace AspCoreTest.Tests
             var result = sut.Get(1);
             
             Assert.IsType<OkObjectResult> (result);
+        }
+        
+        [Fact]
+        public void Post_AddsProductToProductsList()
+        {
+            var sut = new ProductsController();
+            var expected = sut.Get().Count() + 1;
+            
+            sut.Post(new Product{ Id = 4, Name = "Banana"});                       
+            var result = sut.Get().Count();
+            
+            Assert.Equal(expected, result);
         }
     }    
 }

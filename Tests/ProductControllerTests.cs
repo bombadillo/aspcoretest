@@ -1,4 +1,4 @@
-namespace AspCoreTest
+namespace AspCoreTest.Tests
 {
     using Xunit;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace AspCoreTest
     using Controllers;
     using Models;
     
-    public class TestSomething
+    public class ProductControllerTests
     {
         [Fact]
         public void Get_ReturnsListOfProducts()

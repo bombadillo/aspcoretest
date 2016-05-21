@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-
 namespace AspCoreTest
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("/api/products")]
     public class ProductsController
     {

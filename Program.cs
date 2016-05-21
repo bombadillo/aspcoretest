@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
-
-namespace AspCoreTest
+﻿namespace AspCoreTest
 {
+    using System;
+    using System.IO;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Builder;    
+    
     public class Program
     {
         public static void Main(string[] args)

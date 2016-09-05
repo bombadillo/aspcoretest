@@ -6,7 +6,9 @@ namespace AspCoreTest.Tests
     using System.Linq;
     
     using Controllers;
+    using Microsoft.Extensions.Options;
     using Models;
+    using Options;
     using Services;
     
     public class ProductControllerTests
@@ -14,7 +16,7 @@ namespace AspCoreTest.Tests
         [Fact]
         public void Get_ReturnsListOfProducts()
         {
-            var sut = new ProductsController(new ProductRetriever());
+            var sut = new ProductsController(new ProductRetriever(), Options.Create<Config>(null));
             
             var result = sut.Get();
             
@@ -24,8 +26,8 @@ namespace AspCoreTest.Tests
         [Fact]
         public void GetWithId_ReturnsOneProduct()
         {
-            var sut = new ProductsController(new ProductRetriever());
-            
+            var sut = new ProductsController(new ProductRetriever(), Options.Create<Config>(null));
+
             var result = sut.Get(1);
             
             Assert.IsType<OkObjectResult> (result);
@@ -34,8 +36,7 @@ namespace AspCoreTest.Tests
         [Fact]
         public void Post_AddsProductToProductsList()
         {
-            var sut = new ProductsController(new ProductRetriever());
-            var expected = sut.Get().Count() + 1;
+            var sut = new ProductsController(new ProductRetriever(), Options.Create<Config>(null));
             
             var result = sut.Post(new Product{ Id = 4, Name = "Banana"});                       
             

@@ -1,24 +1,30 @@
 namespace AspCoreTest.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
-    
+    using Microsoft.Extensions.Options;
     using Models;
     using Services;
+    using Options;
 
     [Route("/api/products")]
     public class ProductsController
     {
-        private readonly IRetrieveProduct ProductRetriever;       
+        private readonly IRetrieveProduct ProductRetriever;     
 
-        public ProductsController(IRetrieveProduct productRetriever)
+        private Config Config;  
+
+        public ProductsController(IRetrieveProduct productRetriever, IOptions<Config> config)
         {
             ProductRetriever = productRetriever;
+            Config = config.Value;
         }
 
         public IEnumerable<Product> Get()
         {
+            Console.WriteLine(Config.Foo);
             return ProductRetriever.Retrieve();            
         }
 

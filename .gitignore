@@ -1,6 +1,0 @@
-project.lock.json
-bin
-obj
-.vscode
-.vs
-*.user
